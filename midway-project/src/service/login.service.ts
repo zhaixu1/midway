@@ -18,4 +18,9 @@ export class LoginService {
       loginTime: new Date().getTime(),
     };
   }
+
+  async getMysql() {
+    return 'aaa'
+  }
+  
 }

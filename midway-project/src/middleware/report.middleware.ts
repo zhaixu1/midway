@@ -5,6 +5,8 @@ import { NextFunction, Context } from '@midwayjs/koa';
 export class ReportMiddleware implements IMiddleware<Context, NextFunction> {
   resolve() {
     return async (ctx: Context, next: NextFunction) => {
+      console.log(ctx);
+      
       // 控制器前执行的逻辑
       const startTime = Date.now();
       // 执行下一个 Web 中间件，最后执行到控制器
@@ -16,8 +18,19 @@ export class ReportMiddleware implements IMiddleware<Context, NextFunction> {
           Date.now() - startTime
         }ms`
       );
+      console.log(typeof result, result, 'result');
       // 返回给上一个中间件的结果
-      return result;
+      // 进行cookie验证
+      if (ctx.request.method === 'GET') {
+        if(result?.username == 'zx') {
+          return result;
+        }else {
+          return '不是admin'
+        }
+      }else {
+        return result;
+      }
+      
     };
   }
 

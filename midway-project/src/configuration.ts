@@ -3,6 +3,8 @@ import * as koa from '@midwayjs/koa';
 import * as validate from '@midwayjs/validate';
 import * as info from '@midwayjs/info';
 import { join } from 'path';
+import * as orm from '@midwayjs/typeorm';
+import * as redis from '@midwayjs/redis';
 // import { DefaultErrorFilter } from './filter/default.filter';
 // import { NotFoundFilter } from './filter/notfound.filter';
 import { ReportMiddleware } from './middleware/report.middleware';
@@ -12,6 +14,8 @@ import { NotFoundError } from './filter/login.filter';
   imports: [
     koa,
     validate,
+    orm, // 引入org组件
+    redis, // 引入redis组件
     {
       component: info,
       enabledEnvironment: ['local'],
